@@ -25,6 +25,8 @@ abstract class Format
 		protected readonly TranslationContext $translator,
 		protected readonly ?PKCS7 $profileSigner = null,
 		protected readonly ?string $passphrase = null,
+		protected readonly ?string $profileDisplayName = null,
+		protected readonly ?string $profileIdentifier = null,
 	) {
 	}
 
@@ -35,6 +37,8 @@ abstract class Format
 		TranslationContext $translator,
 		?PKCS7 $profileSigner = null,
 		?string $passphrase = null,
+		?string $profileDisplayName = null,
+		?string $profileIdentifier = null,
 	): self {
 		// Check if the provider has access to the realm in the credential
 		// This is not a security check, the credential was already issued,
@@ -54,7 +58,7 @@ abstract class Format
 					static fn( $m ) => \strtoupper( \ltrim( $m[1], '-' ) ), $type ) ?? '-',
 			) );
 			if ( !\str_contains( $className, '-' ) && \class_exists( $className ) && \is_subclass_of( $className, self::class ) ) {
-				return new $className( $credential, $provider, $translator, $profileSigner, $passphrase );
+				return new $className( $credential, $provider, $translator, $profileSigner, $passphrase, $profileDisplayName, $profileIdentifier );
 			}
 		}
 

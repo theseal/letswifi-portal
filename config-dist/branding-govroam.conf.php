@@ -15,6 +15,16 @@ return [
 	'css_file' => 'getgovroam.css',
 	'favicon_file' => 'getgovroam.ico',
 
+	// Override the PayloadDisplayName and PayloadIdentifier of the Apple
+	// mobileconfig profile. When unset, they default to the realm's display
+	// name and reverse-DNS realm identifier respectively.
+	//
+	// NOTE: If you upgraded from the old codebase of the portal, you will need
+	// to align profile_identifier with your old identifier, otherwise newly
+	// installed profiles will not overwrite the previously installed ones.
+	//'profile_display_name' => 'govroam',
+	//'profile_identifier' => 'app.govroam.getgovroam',
+
 	'platforms' => [
 		'android' => [
 			'name' => 'Android',

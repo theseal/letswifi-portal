@@ -114,12 +114,15 @@ switch ( $overrideMethod ?? $_SERVER['REQUEST_METHOD'] ) {
 				$format = $candidate['format'];
 			}
 		}
+		$branding = $app->getBrandingConfiguration();
 		$formatter = Format::getFormatter( $format ?? 'null',
 			credential: $credential,
 			provider: $provider,
 			translator: $app->getTranslationContext(),
 			profileSigner: $app->getProfileSigner(),
 			passphrase: $passphrase,
+			profileDisplayName: $branding?->getStringOrNull( 'profile_display_name' ),
+			profileIdentifier: $branding?->getStringOrNull( 'profile_identifier' ),
 		);
 		$formatter->emit();
 		\assert( false, 'Unreachable code' );
